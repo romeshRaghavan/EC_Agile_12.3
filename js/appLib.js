@@ -3035,7 +3035,7 @@ function arrayRemove(arr, value) {
  //********************  Methods For Attachment -- End ******************************//
 
  function validateExpenseAmtForVoucher(jsonToSaveEA) {
-
+     j('#loading_Cat').show();
      var expenses = jsonToSaveEA.expenseDetails;
      var map = new Map();
      var msg = "";
@@ -3079,7 +3079,7 @@ function arrayRemove(arr, value) {
          console.log("expId expLimitAmt expName : " + expId + "" + expLimitAmt + "" + expName);
 
          if (parseInt(expLimitAmt) < parseInt(value)) {
-
+             j('#loading_Cat').hide();
              msg = msg + " Amount entered " + value + " exceeds defined entitled limit of " + expLimitAmt + " for Expense : " + expName;
              msg = msg + '\n';
 
@@ -3221,6 +3221,7 @@ function arrayRemove(arr, value) {
  //********************  Methods For Entitlement Changes For Buss-Exp -- Start ******************************//
 
  function validateMontlyAmtForVoucherForBE(jsonToSaveBE, busExpDetailsArr, pageRefSuccess, pageRefFailure) {
+
      j('#loading_Cat').show();
 
      j.ajax({
@@ -3280,6 +3281,7 @@ function arrayRemove(arr, value) {
  }
 
  function approvalServiceForBE(jsonToSaveBE, busExpDetailsArr, pageRefSuccess, pageRefFailure) {
+
      j('#loading_Cat').show();
 
      var headerBackBtn = defaultPagePath + 'backbtnPage.html';
@@ -4885,7 +4887,7 @@ function arrayRemove(arr, value) {
                          var row = result.rows.item(record);
 
                          if (row.vocherStatus == 'R' || row.vocherStatus == 'D') {
-                             statusForEdit = 'Rejected';
+                             statusForEdit = 'Sent Back';
                          } else if (row.vocherStatus == 'P') {
                              statusForEdit = 'Pending';
                          } else if (row.vocherStatus == 'F') {
@@ -5073,7 +5075,7 @@ function arrayRemove(arr, value) {
                          var row = result.rows.item(record);
 
                          if (row.vocherStatus == 'R'|| row.vocherStatus == 'D') {
-                             statusForEdit = 'Rejected';
+                             statusForEdit = 'Sent Back';
                          } else if (row.vocherStatus == 'P') {
                              statusForEdit = 'Pending';
                          } else if (row.vocherStatus == 'F') {
@@ -5134,11 +5136,11 @@ function arrayRemove(arr, value) {
 
                          j('#voucherDetailsTab').append(data);
 
-                         if (statusForEdit == 'Rejected' || statusForEdit == 'Draft') {
+                         if (statusForEdit == 'Sent Back' || statusForEdit == 'Draft') {
 
                              buttonValue =   
                                             "<br>"
-                                            +"<div style='margin-left: 2%;'><label>Rejection Comments :</label>"
+                                            +"<div style='margin-left: 2%;'><label>Sent Back Comments :</label>"
                                             +"<br>"
                                             +"<div style='border: 1px;background-color: #eeeeee;padding: 10px 0 10px 10px;box-sizing: border-box;width: 98%;padding-left: 10;'>"+row.rejectionComments+"</div>"
                                             +"<div><br>"

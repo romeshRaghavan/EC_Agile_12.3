@@ -112,7 +112,7 @@ function isNumber_optionalDot(object,messageContent) {
 			return false;
 		}
 		if(object.indexOf(".")>-1 && (object.split('.')[1].length > 2)){
-			 alert(window.lang.translate('Two numbers only allowed after decimal point'));
+			 alert(window.lang.translate('Two digits allowed after decimal point'));
 
 		var expAmt = object.substr(0,object.length-1);
 
