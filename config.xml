@@ -46,19 +46,19 @@
         <variable name=" NSLocationWhenInUseUsageDescription" value="App requires access to the photo library" />
         
     <edit-config target="NSCameraUsageDescription" file="*-Info.plist" mode="merge">
-    <string>need camera access to take pictures</string>
+    <string>This enables use of camera to attach receipt for expense submission</string>
     </edit-config>
     
     <edit-config target="NSPhotoLibraryUsageDescription" file="*-Info.plist" mode="merge">
-    <string>need photo library access to get pictures from there</string>
+    <string>This enables access to gallery to fetches receipt stored for expense </string>
     </edit-config>
     
     <edit-config target="NSLocationWhenInUseUsageDescription" file="*-Info.plist" mode="merge">
-    <string>need location access to find things nearby</string>
+    <string>This enables access to location used while expense submission</string>
     </edit-config>
     
     <edit-config target="NSPhotoLibraryAddUsageDescription" file="*-Info.plist" mode="merge">
-    <string>need photo library access to save pictures there</string>
+    <string>This enables access to gallery to fetches receipt stored for expense</string>
     </edit-config>
 
         <gap:plugin name="cordova-plugin-media-capture" source="npm" />
