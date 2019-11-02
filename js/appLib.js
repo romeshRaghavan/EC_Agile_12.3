@@ -188,7 +188,7 @@ function arrayRemove(arr, value) {
 
          // ****************     Approval Table      ***************** //
 
-         t.executeSql("CREATE TABLE IF NOT EXISTS BEHeader ( busExpHeaderId INTEGER ,busExpNumber TEXT,accHeadId INTEGER REFERENCES accountHeadMst(accHeadId),accHeadDesc TEXT,voucherDate DATE,startDate DATE,endDate DATE,currencyId INTEGER REFERENCES currencyMst(currencyId),currencyName TEXT,editorTotalAmt DOUBLE,vocherStatus TEXT, currentOwnerId INTEGER, currentOwnerName TEXT, rejectionComments TEXT)");
+         t.executeSql("CREATE TABLE IF NOT EXISTS BEHeader ( busExpHeaderId INTEGER ,busExpNumber TEXT,accHeadId INTEGER REFERENCES accountHeadMst(accHeadId),accHeadDesc TEXT,voucherDate DATE,startDate DATE,endDate DATE,currencyId INTEGER REFERENCES currencyMst(currencyId),currencyName TEXT,editorTotalAmt DOUBLE,vocherStatus TEXT, currentOwnerId INTEGER, currentOwnerName TEXT,  createdById INTEGER, creatorName TEXT,rejectionComments TEXT)");
          t.executeSql("CREATE TABLE IF NOT EXISTS BEDetails (busExpDetailId INTEGER ,busExpHeaId INTEGER , expNameId INTEGER REFERENCES expNameMst(expNameId), expName  TEXT,expDate DATE,currencyId INTEGER REFERENCES currencyMst(currencyId),currencyName TEXT, perUnit INTEGER,fromLocation TEXT,toLocation TEXT,convertedAmt DOUBLE ,expAttachment BLOB)");
 
      });
@@ -4794,8 +4794,10 @@ function arrayRemove(arr, value) {
                                  var currentOwnerId = headArray.currentOwnerId;
                                  var currentOwnerName = headArray.currentOwnerName;
                                  var rejectionComments = headArray.rejectionComments;
+								 var createdById = headArray.createdById;
+                                 var creatorName =  headArray.creatorName
 
-                                 t.executeSql("INSERT INTO BEHeader (busExpHeaderId ,busExpNumber ,accHeadId ,accHeadDesc ,voucherDate ,startDate ,endDate ,currencyId ,currencyName ,editorTotalAmt ,vocherStatus , currentOwnerId, currentOwnerName, rejectionComments) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [busExpHeaderId, busExpNumber, accHeadId, accHeadDesc, voucherDate, startDate, endDate, currencyId, currencyName, editorTotalAmt, vocherStatus, currentOwnerId, currentOwnerName, rejectionComments]);
+                                 t.executeSql("INSERT INTO BEHeader (busExpHeaderId ,busExpNumber ,accHeadId ,accHeadDesc ,voucherDate ,startDate ,endDate ,currencyId ,currencyName ,editorTotalAmt ,vocherStatus , currentOwnerId, currentOwnerName, createdById, creatorName , rejectionComments) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [busExpHeaderId, busExpNumber, accHeadId, accHeadDesc, voucherDate, startDate, endDate, currencyId, currencyName, editorTotalAmt, vocherStatus, currentOwnerId, currentOwnerName, createdById, creatorName , rejectionComments]);
 
                              }
                          }
@@ -4895,6 +4897,10 @@ function arrayRemove(arr, value) {
                          }  else if (row.vocherStatus == 'U') {
                              statusForEdit = 'Unpaid';
                              pendingAt = 'Payment Desk'
+                         }
+						 
+						  if(enableDivBasedOnStatus == "A"){
+                            pendingAt = row.creatorName;
                          }
 
                         if(pendingAt == ""){
@@ -5083,6 +5089,10 @@ function arrayRemove(arr, value) {
                          }  else if (row.vocherStatus == 'U') {
                              statusForEdit = 'Unpaid';
                              pendingAt = 'Payment Desk'
+                         }
+						 
+						  if(enableDivBasedOnStatus == "A"){
+                            pendingAt = row.creatorName;
                          }
 
                           if(pendingAt == ""){
